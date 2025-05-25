@@ -20,7 +20,10 @@ const row = (bill) => {
   }
 
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+  /*return (data && data.length) ? data.map(bill => row(bill)).join("") : ""*/
+  // Tri des factures par date en ordre anti-chronologique (de la plus récente à la plus ancienne)
+  const antiChrono = (a, b) => ((a.date < b.date) ? 1 : -1)
+  return (data && data.length) ? [...data].sort(antiChrono).map(bill => row(bill)).join("") : ""
 }
 
 export default ({ data: bills, loading, error }) => {
